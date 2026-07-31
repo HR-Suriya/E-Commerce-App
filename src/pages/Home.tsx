@@ -1,36 +1,22 @@
 /**
- * Home.tsx - Product Listing Page
+ * Home.tsx
  *
- * Purpose: Main shopping page displaying all products with search and filtering
- *
- * Features:
- * - Fetches and displays all products from API
- * - Filters products by search term (title, description, category)
- * - Filters products by selected category
- * - Shows loading skeleton loaders while fetching
- * - Displays "no results" message when filters match nothing
- * - Handles API errors gracefully
- * - Responsive grid layout with product cards
- *
- * Props:
- * - search: Current search term from App state
- * - selectedCategory: Currently selected category
- * - categories: Array of available categories
- * - categoriesLoading/Error: Category fetch state
- * - onAddToCart: Callback to add product to cart
- * - onOpenProduct: Callback to navigate to product details
+ * Main product listing page. It loads the catalog, applies the current search/category
+ * filters, and shows the matching products in a responsive grid.
  */
 
 import { useEffect, useMemo, useState } from "react";
 import { fetchProducts } from "../api";
 import type { Product } from "../types";
 import ProductCard from "../components/ProductCard";
+import { formatCategoryName } from "../utils/formatters";
 
 interface HomeProps {
   search: string;
   selectedCategory: string;
   onAddToCart: (product: Product) => void;
   onOpenProduct: (product: Product) => void;
+  onCategorySelect: (category: string) => void;
   categories?: string[];
   categoriesLoading?: boolean;
   categoriesError?: string | null;
@@ -41,6 +27,7 @@ export default function Home({
   selectedCategory,
   onAddToCart,
   onOpenProduct,
+  onCategorySelect,
   categories = [],
   categoriesLoading = false,
   categoriesError = null,
@@ -81,20 +68,40 @@ export default function Home({
     [products, search, selectedCategory],
   );
 
+  const featuredCategories = useMemo(
+    () => categories.slice(0, 4),
+    [categories],
+  );
+
   return (
     <section className="space-y-8">
       <div className="rounded-[32px] bg-gradient-to-r from-slate-900 via-slate-700 to-slate-950 p-8 text-white shadow-2xl shadow-slate-900/25 md:p-12">
         <div className="max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-300">
-            React Tailwind portfolio app
+          <p className="text-sm uppercase tracking-[0.35em] text-slate-300">
+            Modern storefront experience
           </p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-            Full responsive e-commerce frontend with real API integration.
+            Discover curated essentials with a shopping experience made to feel
+            effortless.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-200">
-            Browse best sellers, filter by category, view product details, and
-            manage a persistent cart in a polished interface.
+            Explore standout products, refine your browse by category, and move
+            from discovery to checkout in minutes.
           </p>
+          {featuredCategories.length > 0 && (
+            <div className="mt-6 flex flex-wrap gap-3">
+              {featuredCategories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => onCategorySelect(category)}
+                  className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20"
+                >
+                  {formatCategoryName(category)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -104,7 +111,7 @@ export default function Home({
             Products
           </p>
           <h2 className="mt-2 text-3xl font-semibold text-slate-950 dark:text-white">
-            Shop all categories
+            Browse the collection
           </h2>
         </div>
         <div className="rounded-3xl bg-slate-100 p-4 text-sm text-slate-700 shadow-sm dark:bg-slate-900 dark:text-slate-300">

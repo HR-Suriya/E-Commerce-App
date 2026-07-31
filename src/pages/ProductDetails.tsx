@@ -1,35 +1,26 @@
 /**
- * ProductDetails.tsx - Individual Product Detail Page
+ * ProductDetails.tsx
  *
- * Purpose: Displays full details for a single product
- *
- * Features:
- * - Shows large product image with details
- * - Displays title, price, description, category, and ratings
- * - Add to cart button
- * - Continue shopping button to return to home
- * - Handles loading state while fetching product
- * - Handles error states (product not found)
- * - Uses React Router location.state for optimistic product data
- * - Falls back to API fetch if no initial data
- *
- * Props:
- * - onAddToCart: Callback to add product to cart
- * - onBack: Callback to navigate back to home page
+ * Shows the full product detail experience, including the product image, pricing,
+ * description, rating summary, and related actions such as adding to cart or browsing
+ * products in the same category.
  */
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchProductById } from "../api";
 import type { Product } from "../types";
+import { formatCategoryName } from "../utils/formatters";
 
 interface ProductDetailsProps {
   onAddToCart: (product: Product) => void;
   onBack: () => void;
+  onCategorySelect: (category: string) => void;
 }
 
 export default function ProductDetails({
   onAddToCart,
   onBack,
+  onCategorySelect,
 }: ProductDetailsProps) {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -100,7 +91,7 @@ export default function ProductDetails({
           />
           <div className="space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500 dark:bg-slate-800 dark:text-slate-300">
-              {product.category}
+              {formatCategoryName(product.category)}
             </div>
             <h1 className="text-4xl break-words font-semibold text-slate-950 dark:text-white">
               {product.title}
@@ -128,10 +119,10 @@ export default function ProductDetails({
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/")}
+                onClick={() => onCategorySelect(product.category)}
                 className="rounded-2xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:border-slate-700 dark:text-slate-200 dark:hover:border-slate-500 dark:focus:ring-slate-500"
               >
-                Continue shopping
+                Browse {formatCategoryName(product.category)}
               </button>
             </div>
           </div>
@@ -143,12 +134,16 @@ export default function ProductDetails({
           Product details
         </p>
         <div className="mt-8 space-y-5 text-slate-700 dark:text-slate-300">
-          <div className="rounded-3xl bg-white p-5 shadow-sm dark:bg-slate-950">
+          <button
+            type="button"
+            onClick={() => onCategorySelect(product.category)}
+            className="w-full rounded-3xl bg-white p-5 text-left shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 dark:bg-slate-950 dark:hover:bg-slate-800 dark:focus:ring-slate-500"
+          >
             <p className="font-semibold">Category</p>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-              {product.category}
+              {formatCategoryName(product.category)}
             </p>
-          </div>
+          </button>
           <div className="rounded-3xl bg-white p-5 shadow-sm dark:bg-slate-950">
             <p className="font-semibold">Stock estimate</p>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">

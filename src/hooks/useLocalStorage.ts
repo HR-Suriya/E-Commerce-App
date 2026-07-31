@@ -1,15 +1,8 @@
 /**
- * useLocalStorage.ts - LocalStorage State Synchronization Hook
+ * useLocalStorage.ts
  *
- * Purpose: Generic React hook for syncing state with browser localStorage
- * - Reads initial value from localStorage
- * - Automatically saves state changes to localStorage
- * - Provides fallback/default value if localStorage is empty
- *
- * Features:
- * - Type-safe with TypeScript generics
- * - Handles JSON serialization/deserialization
- * - Works with any data type (strings, objects, arrays, etc.)
+ * Generic hook for syncing React state with browser storage. It supports JSON-safe values
+ * and keeps the stored state in sync whenever the value changes.
  */
 
 import { useEffect, useState } from "react";

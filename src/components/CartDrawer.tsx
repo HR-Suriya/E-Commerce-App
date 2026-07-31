@@ -1,33 +1,8 @@
 /**
- * CartDrawer.tsx - Shopping Cart Modal Component
+ * CartDrawer.tsx
  *
- * Purpose: Slide-out drawer panel displaying shopping cart contents
- *
- * Features:
- * - Modal dialog with focus management and keyboard accessibility
- * - Can be opened/closed with Escape key
- * - Focus trap: Tab key cycles within drawer only
- * - Returns focus to cart button when closed
- * - Displays cart items with quantity controls (+/- buttons)
- * - Shows cart total and checkout button
- * - Empty cart message when no items
- * - aria-hidden attribute when drawer is closed
- *
- * Props:
- * - open: Boolean to show/hide drawer
- * - cartItems: Array of CartItem objects to display
- * - onClose: Callback when drawer is closed
- * - onUpdateQuantity: Callback to change item quantity
- * - onRemove: Callback to remove item from cart
- * - openerRef: Ref to cart button for focus management
- */
-
-/**
- * CartDrawer.tsx - Shopping cart drawer component
- *
- * Purpose: Displays the user's shopping cart in an accessible slide-out drawer.
- * It includes quantity controls, remove actions, empty state messaging,
- * and keyboard accessibility handling via focus management.
+ * Displays the current basket in a slide-out panel with quantity controls,
+ * removal actions, pricing details, and keyboard-friendly behavior.
  */
 import { useEffect, useRef } from "react";
 import type { CartItem } from "../types";

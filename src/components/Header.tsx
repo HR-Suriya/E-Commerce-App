@@ -1,37 +1,12 @@
 /**
- * Header.tsx - Navigation and Search Bar Component
+ * Header.tsx
  *
- * Purpose: Main navigation header with search, filtering, and cart access
- *
- * Features:
- * - Search input with clear button (affordance for users)
- * - Category filter dropdown with loading/error states
- * - Theme toggle (light/dark mode)
- * - Cart button with item count badge
- * - Responsive design with mobile-friendly layout
- * - Accessibility: Focus states, aria labels, keyboard navigation
- *
- * Props:
- * - cartCount: Number of items in cart
- * - search: Current search term
- * - selectedCategory: Currently selected category
- * - categories: Array of available categories
- * - categoriesLoading/Error: API state for categories
- * - onSearchChange: Callback when search input changes
- * - onCategoryChange: Callback when category is selected
- * - onToggleCart: Callback to open cart drawer
- * - onToggleTheme: Callback to switch theme
- * - onResetFilters: Callback to clear search and category
- */
-
-/**
- * Header.tsx - Site header and top navigation
- *
- * Purpose: Provides search, category filtering, theme toggle, and cart access.
- * It also surfaces loading/error state for category data.
+ * Top navigation bar for the storefront. It provides search, category filtering,
+ * theme switching, cart access, and a clear path back to the catalog.
  */
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { formatCategoryName } from "../utils/formatters";
 
 interface HeaderProps {
   cartCount: number;
@@ -84,7 +59,8 @@ export default function Header({
               MarketHub
             </Link>
             <div className="text-sm text-slate-600 dark:text-slate-400">
-              Responsive shop UI with cart, filters, and product pages.
+              A polished shopping experience with smart filters, a live cart,
+              and rich product details.
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -148,7 +124,7 @@ export default function Header({
               {!categoriesLoading &&
                 categories.map((category) => (
                   <option key={category} value={category}>
-                    {category}
+                    {formatCategoryName(category)}
                   </option>
                 ))}
             </select>

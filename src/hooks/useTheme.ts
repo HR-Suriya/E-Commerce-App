@@ -1,16 +1,8 @@
 /**
- * useTheme.ts - Dark Mode Theme Management Hook
+ * useTheme.ts
  *
- * Purpose: Custom React hook for managing light/dark theme
- * - Toggles between light and dark themes
- * - Persists theme preference to localStorage
- * - Updates document.documentElement class for dark mode CSS
- * - Initializes theme from localStorage or defaults to light
- *
- * Features:
- * - Automatic DOM class updates when theme changes
- * - LocalStorage persistence across sessions
- * - CSS-based dark mode (Tailwind dark: selector)
+ * Manages the app's light and dark mode state. It reads any saved preference,
+ * updates the document theme class, and exposes a toggle for the interface.
  */
 
 import { useEffect, useState, useCallback } from "react";

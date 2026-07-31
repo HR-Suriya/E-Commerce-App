@@ -1,8 +1,12 @@
 {
-  "name": "full-responsive-ecommerce-app",
+  "name": "hrs-commerce-app",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
+  "author": {
+    "name": "HR-Suriya",
+    "email": "mhrsuriya@gmail.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

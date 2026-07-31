@@ -1,9 +1,8 @@
 /**
- * types.ts - TypeScript Type Definitions
+ * types.ts
  *
- * Defines all core types used throughout the application:
- * - Product: Represents a product from the API (id, title, price, etc.)
- * - CartItem: Extends Product with quantity property for shopping cart
+ * Shared TypeScript interfaces for the app's main data models, keeping the UI,
+ * hooks, and API layer consistent when working with products and cart items.
  */
 
 export interface Product {

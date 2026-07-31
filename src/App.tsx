@@ -1,29 +1,8 @@
 /**
- * App.tsx - Main Application Component
+ * App.tsx
  *
- * Purpose:
- * - Serves as the root component and main app shell
- * - Manages global state: cart, categories, search, theme
- * - Handles routing between Home page and Product Details page
- * - Provides cart drawer modal and header navigation
- *
- * Responsibilities:
- * - Fetch categories from API and handle loading/error states
- * - Coordinate cart operations across all pages
- * - Manage theme switching (light/dark mode)
- * - Route between different pages and pass necessary props
- * - Focus management for accessibility (cart drawer)
- */
-
-/**
- * App.tsx - Main Application Component
- *
- * This component is the root of the app and coordinates app-wide state.
- * It manages:
- * - Cart drawer visibility and cart operations
- * - Theme switching (light/dark)
- * - Category fetching and filter state
- * - Routing between Home and Product Details pages
+ * Main app shell that connects routing, cart state, category filters, theme switching,
+ * and the shared header and drawer experience.
  */
 import { useEffect, useRef, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
@@ -47,6 +26,7 @@ function App() {
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const { theme, toggleTheme } = useTheme();
 
@@ -86,13 +66,26 @@ function App() {
     };
   }, []);
 
-  const handleAddToCart = (product: Product) => addToCart(product);
+  const handleAddToCart = (product: Product) => {
+    addToCart(product);
+    setToastMessage(`${product.title} added to cart`);
+    window.setTimeout(() => setToastMessage(null), 1800);
+  };
   const handleUpdateQuantity = (productId: number, quantity: number) =>
     updateQuantity(productId, quantity);
   const handleRemove = (productId: number) => removeFromCart(productId);
 
   const openProduct = (product: Product) => {
     navigate(`/product/${product.id}`, { state: product });
+  };
+
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    setSearch("");
+
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
   };
 
   const resetFilters = () => {
@@ -127,6 +120,7 @@ function App() {
                 selectedCategory={selectedCategory}
                 onAddToCart={handleAddToCart}
                 onOpenProduct={openProduct}
+                onCategorySelect={handleCategorySelect}
                 categories={categories}
                 categoriesLoading={categoriesLoading}
                 categoriesError={categoriesError}
@@ -139,6 +133,7 @@ function App() {
               <ProductDetails
                 onAddToCart={handleAddToCart}
                 onBack={() => navigate("/")}
+                onCategorySelect={handleCategorySelect}
               />
             }
           />
@@ -152,6 +147,11 @@ function App() {
         onUpdateQuantity={handleUpdateQuantity}
         onRemove={handleRemove}
       />
+      {toastMessage && (
+        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-lg shadow-slate-900/25 dark:bg-slate-100 dark:text-slate-950">
+          {toastMessage}
+        </div>
+      )}
       {location.pathname !== "/" && (
         <button
           type="button"

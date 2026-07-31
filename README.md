@@ -1,163 +1,138 @@
-# 🛍️ Full Responsive E-Commerce App
+# 🛍️ MarketHub Commerce
 
-A modern, fully-featured e-commerce storefront built with **React**, **TypeScript**, **Tailwind CSS**, and **Vite**. This project showcases a responsive shopping experience with advanced features like real-time search, category filtering, cart management, dark mode, and comprehensive accessibility support.
+MarketHub Commerce is a modern and responsive e-commerce web application built with React, TypeScript, Tailwind CSS, and Vite. The project provides a polished shopping experience with product discovery, filtering, cart interactions, theme switching, and a product detail flow that feels clean and user-friendly.
 
-**Live Preview:** After building, the app is ready for deployment and can be previewed locally.
+## 📌 Project Overview
 
----
+This application is designed to simulate a real online shopping experience for users browsing products, exploring categories, and managing a cart. It emphasizes a smooth user interface, strong accessibility support, and maintainable frontend architecture.
 
 ## ✨ Features
 
-### 🛒 Shopping Features
+### Shopping Features
 
-- **Product Listing**: Browse all products in a responsive grid layout with product cards
-- **Search**: Real-time search functionality across product titles, descriptions, and categories
-- **Category Filtering**: Filter products by category with a dropdown selector
-- **Product Details**: View detailed information for each product including description, price, rating, and reviews
-- **Shopping Cart**: Add items to cart, adjust quantities, remove items
-- **Cart Persistence**: Shopping cart contents are automatically saved to localStorage across browser sessions
-- **Checkout Ready**: Cart total calculation with checkout button
+- Product catalog with a responsive grid layout
+- Product cards with images, prices, categories, and ratings
+- Search functionality for finding products quickly
+- Category-based filtering to narrow product results
+- Product detail page with description, price, and rating information
+- Add-to-cart actions with quantity controls
+- Cart drawer with subtotal, total, and removal actions
+- Cart persistence so items remain available after refresh
 
-### 🎨 User Interface
+### User Interface
 
-- **Responsive Design**: Mobile-first approach works seamlessly on all devices (mobile, tablet, desktop)
-- **Dark Mode**: Toggle between light and dark themes with persistent preference storage
-- **Smooth Animations**: CSS transitions for better user experience
-- **Loading States**: Skeleton loaders during API calls
-- **Error Handling**: Graceful error messages for failed requests
+- Modern and polished layout with a professional storefront feel
+- Mobile-friendly and responsive design for phones, tablets, and desktops
+- Clean hero section and intuitive navigation structure
+- Smooth visual feedback for interactions such as adding items to the cart
+- Light and dark mode support with a persistent theme preference
 
-### ♿ Accessibility (WCAG Compliant)
+### Accessibility
 
-- **Focus Management**: Visible focus states on all interactive elements
-- **Keyboard Navigation**: Full keyboard support including Escape to close drawer, Tab cycling
-- **Focus Trap**: Modal focus management keeps keyboard users in the cart drawer
-- **ARIA Labels**: Semantic HTML and ARIA attributes for screen readers
-- **Color Contrast**: High contrast ratios for readability
-- **Lazy Loading**: Images load on demand for better performance
+- Keyboard-friendly navigation for core interactions
+- Focus management for cart interactions and modal-like UI behavior
+- Semantic structure and accessible labels for improved screen-reader support
+- Clear visual affordances for buttons, links, and controls
 
-### 🧪 Quality Assurance
+### Quality Assurance
 
-- **Comprehensive Tests**: 26 unit and component tests covering:
-  - Cart operations (add, update quantity, remove)
-  - Theme persistence and switching
-  - Cart drawer rendering and interactions
-- **Type Safety**: Full TypeScript implementation for runtime safety
-- **Code Organization**: Well-documented components with clear responsibility separation
+- Unit and component tests for critical app behavior
+- Coverage for cart logic, theme handling, and cart drawer interactions
+- Type-safe development with TypeScript to reduce runtime issues
+- Build validation to ensure the app compiles cleanly for production
 
----
-
-## 🛠️ Technology Stack
+## 🛠️ Technologies Used
 
 ### Frontend
 
-- **React 18.3.1** - UI library with hooks-based architecture
-- **TypeScript 5.6.2** - Static type checking
-- **React Router DOM 6.18.1** - Client-side routing (SPA)
-- **Tailwind CSS 3.4.4** - Utility-first CSS framework
+- React for building the user interface
+- TypeScript for type safety and better code maintainability
+- React Router for page navigation between home and product detail views
 
 ### Build & Development
 
-- **Vite 5.4.1** - Modern bundler for fast development and optimized builds
-- **@vitejs/plugin-react 4.3.1** - React support for Vite
+- Vite for fast development and optimized production builds
+- PostCSS and Autoprefixer for CSS processing and browser compatibility
 
 ### Testing
 
-- **Vitest 0.34.6** - Unit testing framework
-- **@testing-library/react 14.0.0** - React component testing utilities
-- **@testing-library/jest-dom 6.9.1** - DOM matchers for testing library
-- **jsdom 22.1.0** - DOM environment for tests
+- Vitest as the testing framework
+- Testing Library for rendering and interaction-based component tests
+- jsdom for DOM-based test environments
 
 ### Styling
 
-- **PostCSS 8.4.40** - CSS processing
-- **Autoprefixer 10.4.19** - Browser prefix support
+- Tailwind CSS for utility-first styling and responsive UI design
 
 ### API
 
-- **Fake Store API** - Mock e-commerce API for product data
+- Fake Store API for realistic product and category data
 
----
+## 📁 Project Structure
 
-## 📋 Project Structure
-
-```
+```text
 src/
-├── App.tsx                 # Root component with routing and global state
-├── main.tsx               # Application entry point
-├── types.ts               # TypeScript type definitions (Product, CartItem)
-├── api.ts                 # API integration layer for Fake Store API
-├── index.css              # Global styles
-│
+├── App.tsx                  # Main app layout and routing
+├── api.ts                   # API calls for products and categories
+├── main.tsx                 # Application entry point
+├── types.ts                 # Shared TypeScript interfaces
 ├── components/
-│   ├── Header.tsx         # Navigation, search, filters, cart button
-│   ├── CartDrawer.tsx     # Shopping cart modal with accessibility
-│   └── ProductCard.tsx    # Individual product card component
-│
+│   ├── Header.tsx           # Header, search, filters, and cart trigger
+│   ├── ProductCard.tsx      # Product card UI component
+│   └── CartDrawer.tsx       # Slide-out cart interface
 ├── pages/
-│   ├── Home.tsx           # Product listing page with filtering
-│   └── ProductDetails.tsx # Single product detail page
-│
+│   ├── Home.tsx             # Product listing page
+│   └── ProductDetails.tsx   # Single product detail page
 ├── hooks/
-│   ├── useCart.ts         # Cart state management and localStorage sync
-│   ├── useTheme.ts        # Theme state and dark mode management
-│   └── useLocalStorage.ts # Generic localStorage hook
-│
-├── test/
-│   ├── setup.ts           # Test environment configuration
-│   ├── useCart.test.ts    # Cart hook tests
-│   ├── useTheme.test.ts   # Theme hook tests
-│   └── CartDrawer.test.tsx # Cart drawer component tests
-│
-└── icons/
-    ├── CartIcon.tsx       # SVG cart icon
-    ├── MoonIcon.tsx       # SVG moon icon
-    └── SunIcon.tsx        # SVG sun icon
+│   ├── useCart.ts           # Cart state management
+│   ├── useTheme.ts          # Theme toggle state management
+│   └── useLocalStorage.ts   # Browser storage helper
+├── utils/
+│   └── formatters.ts        # Utility functions for formatting labels and ratings
+└── test/
+    ├── setup.ts
+    ├── useCart.test.ts
+    ├── useTheme.test.ts
+    └── CartDrawer.test.tsx
 ```
 
----
-
-## 🚀 Getting Started
+## ▶️ Getting Started
 
 ### Prerequisites
 
-- **Node.js** 18+ or higher
-- **npm** 9+
+- Node.js 18 or higher
+- npm 9 or higher
 
 ### Installation
 
-1. **Clone or navigate to the project directory**
-
-```bash
-cd "E-Commerce App"
-```
-
-2. **Install dependencies**
+1. Clone or open the project folder.
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Development
+### Run in Development Mode
 
-Start the development server with hot module reloading:
+Start the local development server:
 
 ```bash
 npm run dev
 ```
 
-Opens at `http://localhost:5173`
+Then open the URL shown in the terminal, usually:
 
-### Production Build
+```text
+http://localhost:5173
+```
 
-Build for production:
+### Build for Production
+
+Create a production build:
 
 ```bash
 npm run build
 ```
-
-This runs TypeScript checks and creates optimized files in the `dist/` folder.
-
-### Preview Production Build
 
 Preview the production build locally:
 
@@ -165,98 +140,25 @@ Preview the production build locally:
 npm run preview
 ```
 
-Opens at `http://localhost:4173`
-
----
-
-## 📜 Available Scripts
-
-| Command            | Description                                 |
-| ------------------ | ------------------------------------------- |
-| `npm run dev`      | Start development server with HMR           |
-| `npm run build`    | Create production build (TypeScript + Vite) |
-| `npm run preview`  | Preview production build locally            |
-| `npm test`         | Run tests in watch mode                     |
-| `npm run test:ui`  | Run tests with interactive UI dashboard     |
-| `npm run test:run` | Run tests once (CI mode)                    |
-| `npm run lint`     | Check TypeScript types (no emit)            |
-
----
-
-## 🔄 State Management
-
-### Cart Management (`useCart`)
-
-- Centralized hook managing cart items
-- Automatic localStorage synchronization
-- Methods: `addToCart()`, `updateQuantity()`, `removeFromCart()`
-- Exports: `cart`, `cartCount`, and operation handlers
-
-### Theme Management (`useTheme`)
-
-- Centralized hook for light/dark mode
-- Persists user preference to localStorage
-- Updates `document.documentElement.classList` for Tailwind dark mode
-- Methods: `toggleTheme()`, `setTheme()`
-- Exports: `theme`, `toggleTheme`
-
----
-
-## 🧪 Testing
-
-### Running Tests
-
-**Watch Mode** (rerun on file changes):
+## 🧪 Available Scripts
 
 ```bash
-npm test
+npm run dev        # Start the development server
+npm run build      # Create a production build
+npm run preview    # Preview the built app locally
+npm run test:run   # Run the test suite once
+npm test           # Start Vitest in watch mode
 ```
 
-**Interactive UI** (visual dashboard):
+## 🧠 Application Architecture Notes
 
-```bash
-npm run test:ui
-```
+- The cart state is managed through a dedicated hook and synced to local storage.
+- The theme preference is also persisted so users keep their selected appearance across sessions.
+- Product data is fetched from the Fake Store API and displayed through reusable components.
 
-**Single Run** (CI/CD):
+## ✅ Summary
 
-```bash
-npm run test:run
-```
-
-### Test Coverage
-
-- **useCart.test.ts**: 8 tests covering cart operations and persistence
-- **useTheme.test.ts**: 7 tests covering theme toggle and storage
-- **CartDrawer.test.tsx**: 11 tests covering rendering, interactions, and accessibility
-
-Total: **26 passing tests**
-
----
-
-## 🎯 Key Features in Detail
-
-### Search & Filtering
-
-- **Real-time Search**: Filters products by title, description, and category as you type
-- **Clear Button**: Visual affordance to clear search with × button
-- **Category Filter**: Dropdown with loading state while categories are fetched
-- **Reset Filters**: One-click button to clear all filters
-
-### Cart Experience
-
-- **Keyboard Accessible**: Press Escape to close, Tab to navigate
-- **Focus Management**: Automatically returns focus to cart button when closed
-- **Quantity Controls**: +/- buttons for easy quantity adjustment
-- **Empty State**: Clear message when cart is empty
-- **Total Calculation**: Real-time cart total display
-
-### Responsive Layout
-
-- **Mobile First**: Optimized for small screens
-- **Tablet/Desktop**: Grid adjusts for larger viewports
-- **Touch Friendly**: Large tap targets for mobile users
-- **Flexible Spacing**: Proper padding and margins across all breakpoints
+MarketHub Commerce is a complete example of a modern frontend storefront with a polished user experience, responsive layout, accessible interactions, and strong development practices. It is suitable for showcasing React and TypeScript skills in a realistic e-commerce product context.
 
 ### Performance
 

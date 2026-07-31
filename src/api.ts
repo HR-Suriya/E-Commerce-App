@@ -1,15 +1,8 @@
 /**
- * api.ts - API Integration Layer
+ * api.ts
  *
- * Purpose: Centralized API calls to the Fake Store API
- * - Handles all data fetching for products and categories
- * - Provides error handling for failed API calls
- * - Uses environment-independent base URL
- *
- * API Endpoints:
- * - GET /products - Fetch all products
- * - GET /products/:id - Fetch single product by ID
- * - GET /products/categories - Fetch all product categories
+ * Centralizes requests to the Fake Store API so the UI layer can stay focused on
+ * rendering and user interaction rather than network details.
  */
 
 import type { Product } from "./types";

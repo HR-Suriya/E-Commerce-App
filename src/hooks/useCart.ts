@@ -1,17 +1,9 @@
 /**
- * useCart.ts - Shopping Cart State Management Hook
+ * useCart.ts
  *
- * Purpose: Custom React hook that manages all cart-related state and operations
- * - Maintains list of items in cart (CartItem[])
- * - Provides methods to add, update, and remove items
- * - Persists cart data to localStorage automatically
- * - Calculates cart item count
- *
- * Features:
- * - Automatic localStorage sync on cart changes
- * - Loads persisted cart on mount
- * - Prevents duplicate items (increments quantity instead)
- * - Removes items with quantity 0
+ * Holds the current cart state and exposes helpers for adding, updating, removing,
+ * and counting items. The cart is also saved to local storage so it remains available
+ * after a page refresh.
  */
 
 import { useCallback, useEffect, useMemo, useState } from "react";

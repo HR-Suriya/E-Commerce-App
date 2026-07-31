@@ -3,10 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
-/**
- * Entry point for the React application.
- * Wraps the App component with BrowserRouter for client-side routing.
- */ ReactDOM.createRoot(document.getElementById("root")!).render(
+
+// Bootstrap the app, mount it into the root element, and enable client-side navigation.
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
